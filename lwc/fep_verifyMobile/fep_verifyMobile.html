@@ -1,0 +1,92 @@
+<template>
+  <template lwc:if={errorMessage}>
+    <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+      <span class="slds-assistive-text">error</span>
+      <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+        title="Description of icon when needed">
+        <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+        </svg>
+      </span>
+      <h2>{errorMessage}
+      </h2>
+      <div class="slds-notify__close">
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close"
+          onclick={handleAlert}>
+          <svg class="slds-button__icon" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+      </div>
+    </div>
+  </template>
+  <template lwc:if={successMessage}>
+    <div class="slds-notify slds-notify_alert success" role="alert">
+      <span class="slds-assistive-text">success</span>
+      <span class="slds-icon_container slds-m-right_x-small"
+        title="Description of icon when needed">
+        <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success"></use>
+        </svg>
+      </span>
+      <h2>{successMessage}
+      </h2>
+      <div class="slds-notify__close">
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close"
+          onclick={handleAlert}>
+          <svg class="slds-button__icon" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+      </div>
+    </div>
+  </template>
+  <template lwc:if={showRegisterMobile}>
+    <lightning-card variant="Narrow" title="Verify your mobile">
+      <div if:false={isLoaded}>
+        <lightning-spinner variant="brand" alternative-text="Loading" size="xx-large"></lightning-spinner>
+      </div>
+      <p class="slds-var-p-horizontal_small"><span>To make sure your account is secure, we have sent a verification code
+          to your mobile phone. Please enter code below to access the site.</span></p>
+      <div class="slds-var-p-top_small"></div>
+      <div class="slds-var-p-horizontal_small">
+        <lightning-input type="text" variant="standard" name="VerificationCode" label="Verification Code"
+          placeholder="Verification Code" onchange={handleChange}></lightning-input>
+        <button class="slds-button slds-button_brand slds-button_stretch" onclick={handleVerification}>Verify</button>
+        <div class="slds-var-p-top_small"></div>
+        <div class="slds-border_top"></div>
+        <div class="slds-var-p-top_small"></div>
+
+        <div class="slds-clearfix">
+          <div class="slds-float_right">
+            <a style="vertical-align:sub" onclick={handleResend}>Resend Code</a>
+          </div>
+        </div>
+
+      </div>
+    </lightning-card>
+  </template>
+  <template lwc:else>
+    <lightning-card variant="Narrow" title="Opt-In Mobile Phone for future login via SMS/Text">
+      <p class="slds-var-p-horizontal_small"><span>Would you like to use the mobile phone entered at registration to
+          login using SMS/Text in the future? </span><br><br>Click Send Code to Opt-In and a validation code will be
+        sent to your mobile phone or click Not now, maybe later to login only using email.</p>
+      <div class="slds-var-p-top_small"></div>
+      <div class="slds-var-p-horizontal_small">
+        <button class="slds-button slds-button_brand slds-button_stretch" onclick={handleSendCode}>Send Code</button>
+        <div class="slds-clearfix">
+          <div class="slds-float_right">
+            <p class=""><i>Note: “Message and data rates may apply”</i></p>
+          </div>
+        </div>
+        <div class="slds-var-p-top_small"></div>
+        <div class="slds-border_top"></div>
+        <div class="slds-var-p-top_small"></div>
+        <button class="slds-button slds-button_brand slds-align_absolute-center skip" onclick={handleSkip}>Not now, maybe later</button>
+      </div>
+    </lightning-card>
+  </template>
+
+</template>

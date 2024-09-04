@@ -1,0 +1,8 @@
+<template>
+    <template lwc:if={result}>
+    <lightning-formatted-rich-text value={result}></lightning-formatted-rich-text>
+    </template>
+    <template lwc:if={errorMessage}>
+        <div class="slds-text-align_center slds-text-color_error"> There was an issue retrieving the information. Please try again later.</div>
+    </template>
+</template>

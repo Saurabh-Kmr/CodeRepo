@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-grid">
+    <div class="slds-col prevScheduleHeading">Parent Record:</div>
+        <div class="slds-col slds-m-bottom_small"><a>{contactName}</a></div>
+    </div>
+    <div class=" slds-text-title_bold headingStyle">Select Financial Coaches</div>
+    <fieldset class="slds-form-element" onchange={handleRadioChange}>
+        <legend class="slds-form-element__legend slds-form-element__label slds-m-bottom_x-small">By Name</legend>
+        <div class="slds-form-element__control">
+            <span class="slds-radio">
+                <input type="radio" id="radio-59" value="byname" name="default" checked={optionSelected} data-id="radio-button" onclick={handleRadioSelect}/>
+                <label class="slds-radio__label slds-grid" for="radio-59">
+                    <span class="slds-radio_faux  slds-col-1-of-12"></span>
+                    <lightning-record-picker  label="Select Name" variant="label-hidden" placeholder="Search coaches..." class="slds-col" 
+                    object-api-name="ServiceResource" onfocus={checkRadioButton} onchange={handlePickerChange}>
+                </lightning-record-picker>
+                </label>
+            </span>
+         
+        </div>
+    </fieldset>
+    <div class="slds-p-top_medium prevScheduleHeading">By previously scheduled appointments</div>
+    <template if:true={prevScheduleAppointment}>
+        <c-fep_coach-card appointment={prevScheduleAppointment} oncoachchange={handlePrevCoachChange}></c-fep_coach-card>
+    </template>
+    <template if:false={prevScheduleAppointment}>
+        <div>Looks like you don't have a financial coach on your record yet, please find a new financial coach above.
+        </div>
+    </template>
+</template>

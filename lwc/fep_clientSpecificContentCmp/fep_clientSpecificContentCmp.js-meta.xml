@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<apiVersion>60.0</apiVersion>
+	<isExposed>true</isExposed>
+	<masterLabel>Client Specific Content</masterLabel>
+	<targets>
+		<target>lightningCommunity__Page</target>
+		<target>lightningCommunity__Default</target>
+	</targets>
+	<targetConfigs>  
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="fieldToDisplay" type="String" default="FEP_Content1__c" label="Select the field name to display data" required="true" datasource="apex://FEP_ContentFieldPickList" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,45 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template lwc:if={errorMessage}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+              <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+              </svg>
+            </span>
+            <h2>{errorMessage}
+              <a href='{contactUsLink}'>{hrefTag}</a>
+            </h2>
+            <div class="slds-notify__close">
+              <button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick={handleAlert}>
+                <svg class="slds-button__icon" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Close</span>
+              </button>
+            </div>
+          </div>
+    </template>
+    <lightning-card variant="Narrow" title="">
+        <div class="slds-var-p-horizontal_small">
+            <div if:false={isLoaded}>
+                <lightning-spinner variant="brand" alternative-text="Loading" size="xx-large"></lightning-spinner>
+            </div>
+            <template for:each={recordFields} for:item="field" for:index="indexVar">
+                <lightning-input key={index} data-type="user-input" data-name={field.fieldPath} label={field.label}
+                    type={field.type} pattern={field.pattern} placeholder={field.placeholder} message-when-pattern-mismatch={field.pattrenMissMatch} value={field.value}  onchange={handleInputChange} required="true"></lightning-input>
+            </template>
+         <!--   <lightning-radio-group name="radioGroup" label="Verification Mode" options={OPTIONS}
+                value={defaultVerificationMethod} required onchange={handleRadioChange} class="slds-var-m-around_x-small"
+                type="radio"></lightning-radio-group>-->
+            <button class="slds-button slds-button_brand slds-button_stretch"  onclick={handleSignUp}>Sign Up</button>
+            <div class="slds-var-p-top_small"></div>
+            <div class="slds-border_top"></div>
+            <div class="slds-var-p-top_small"></div>
+            <lightning-button variant="base" label="Already have an account?" title="Already have an account?"
+                onclick={handleExistingUser}
+                class="slds-button slds-button_middle slds-button_stretch"></lightning-button>
+        </div>
+   </lightning-card>
+</template>

@@ -1,0 +1,100 @@
+.greenBackgroundButton{
+    color: black;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .greenBackgroundButton:hover{
+    color: orange;
+  }
+  .coachName{
+    font-weight: bold;
+}
+.input-no-border {
+  --lwc-shadowButtonFocus: 0;
+  --lwc-borderWidthThin: 0;
+  --slds-c-input-shadow-focus: 0;
+  --sds-c-input-shadow-focus: 0;
+}
+.appointmentType{
+  display: inline-flex;
+}
+.slotCss{
+  font-weight: bold;
+}
+.slotDynamicCss{
+  background: orange;
+  color: white;
+}
+.coachCardClass{
+  border: 3px solid rgb(0, 95, 178);
+}
+.coachAppTimeClass{
+  margin: 5px;
+  border: 3px solid orange;
+}
+.appButton{
+  margin: 5px;
+  border: 1px solid darkgrey;
+  padding:5px;
+  cursor:pointer;
+}
+
+.appButtonSelected{
+  margin: 5px;
+  border: 3px solid orange;
+  padding:5px;
+  cursor:pointer;
+}
+
+.timeSlotSection{
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.coachNameCss{
+  align-content: center;
+  margin-left: 5px;
+}
+.thankYousection{
+  color: white;
+}
+.coachHeading{
+  padding: 11px;
+}
+.appTypeText{
+  font-size: small;
+  align-self: center;
+}
+@media (min-height: 270px) { 
+  .reviewMobileForm{ 
+      max-height: 274px;
+      overflow-y: auto;
+      overflow-x: hidden;
+  }
+}
+
+.labelColour{
+  --lwc-colorTextLabel: orange;
+}
+.cancelButton{
+  border: 2px solid #ccc !important; /* Gray border */
+  background-color: #fff !important; /* White background */
+  color: #000 !important; /* Black font color */
+}
+.cancelButtonReview{
+  border:none;
+  padding-bottom:1px !important;
+  border-radius: none !important;
+  background-color: #ccc !important; /* White background */
+  color: #000 !important; /* Black font color */
+}
+input[type="date"] {
+    min-width:95.6%;
+    -webkit-appearance : none;
+    /* min-height: calc(var(--lwc-heightInput,1.875rem) + (1px * 2) + 24px) !important; */
+}
+.selectDateLabel{
+  align-self: center;
+  float: left;
+}

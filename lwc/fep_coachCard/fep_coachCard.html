@@ -1,0 +1,36 @@
+<template>
+
+    <!-- <div for:each={appointment} for:item="currentAppointment" for:index="index" key={currentAppointment.coachId}>
+        <div class="slds-grid" onclick={handleCardClick} data-id={currentAppointment.coachId}
+            data-value={currentAppointment.coachName}>
+            <div>
+                <lightning-icon icon-name="action:user" alternative-text="User" title="User"></lightning-icon>
+            </div>
+            <div class="slds-m-left_x-small">
+                <h1 class="coachName">{currentAppointment.coachName}</h1>
+                <div>Last appointment : {currentAppointment.lastAppointmentDate}</div>
+            </div>
+        </div>
+    </div> -->
+
+    <fieldset class="slds-form-element">
+        <div class="slds-form-element__control slds-grid" for:each={appointment} for:item="currentAppointment" for:index="index" key={currentAppointment.coachId}>
+            <span class="slds-radio slds-p-around_medium">
+                <input type="radio" id={currentAppointment.serviceAppointmentId} value={currentAppointment.caoachId} name="default"  data-id={currentAppointment.coachId}
+                data-value={currentAppointment.coachName} onchange={handleCardClick}/>
+                <label class="slds-radio__label slds-grid" for={currentAppointment.serviceAppointmentId}>
+                    <span class="slds-radio_faux"></span>
+                    <div class="slds-grid slds-m-left_small slds-box" onclick={handleCardClick}>
+                        <div>
+                            <lightning-icon icon-name="action:user" alternative-text="User" title="User"></lightning-icon>
+                        </div>
+                        <div class="slds-m-left_x-small">
+                            <h1 class="coachName">{currentAppointment.coachName}</h1>
+                            <div>Last appointment : {currentAppointment.lastAppointmentDate}</div>
+                        </div>
+                    </div>
+                </label>
+            </span>
+        </div>
+    </fieldset>
+</template>

@@ -1,0 +1,74 @@
+<template>
+  <template lwc:if={successMessage}>
+    
+        <h2 style="font-weight: bold;">Thank you for contacting us. We will review your request and respond via email.
+        </h2>
+       
+</template>
+<template lwc:else>
+    <template lwc:if={errorMessage}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+              <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+              </svg>
+            </span>
+            <h2>{errorMessage}
+            </h2>
+            <div class="slds-notify__close">
+              <button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick={handleAlert}>
+                <svg class="slds-button__icon" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Close</span>
+              </button>
+            </div>
+          </div>
+    </template>
+    <h2 class="slds-align_absolute-center slds-p-bottom_small">
+      Having an issue? Please fill out the form below so we can better assist you.
+    </h2>
+    <lightning-card variant="Narrow">
+        <div class="slds-var-p-horizontal_small">
+            <div if:false={isLoaded}>
+                <lightning-spinner variant="brand" alternative-text="Loading" size="xx-large"></lightning-spinner>
+            </div>
+                <lightning-input data-type="user-input" data-name="FEP_FirstName__c" label="First Name"
+                    type="text" value ={FEP_FirstName__c} required="true"></lightning-input>
+                <lightning-input data-type="user-input" data-name="FEP_LastName__c" label="Last Name"
+                    type="text" value ={FEP_LastName__c} required="true"></lightning-input>
+                <lightning-input data-type="user-input" data-name="FEP_Email__c" label="Email"
+                    type="email"  value ={FEP_Email__c} pattern={EMAIL_PATTERN} required="true"></lightning-input>
+                <lightning-input data-type="user-input" data-name="FEP_Mobile__c" label="Mobile Phone"
+                    type="tel" value={FEP_Mobile__c} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  message-when-pattern-mismatch= "Please enter 10 digit mobile in following format 999-999-9999" required="true" onchange={handleMobileChange}></lightning-input>
+                    <lightning-input data-type="user-input" data-name="FEP_CompanyName__c" label="Company Name"
+                    type="text" value={FEP_CompanyName__c} required="true"></lightning-input>
+                <lightning-combobox
+                    data-type="user-input" 
+                    data-name="FEP_ReasonForContactingUs__c"
+                    name="reasonForContact"
+                    label="Reason for Contacting Us"
+                    value={defaultValue}
+                    placeholder="Select Reason"
+                    options={options}
+                    onchange={handleComboChange}
+                    required
+            ></lightning-combobox>
+         <template lwc:if={isOtherSelected}>
+            <lightning-textarea data-type="user-input" data-name="FEP_IfOtherDetails__c" label="If Other, please provide details"
+             max-length="255"  required="true"></lightning-textarea>
+        </template>
+            <button class="slds-button slds-button_brand slds-button_stretch"  onclick={handleContactUs}>Submit</button>
+            <div class="slds-var-p-top_small"></div>
+            <div class="slds-border_top"></div>
+            <div class="slds-var-p-top_small"></div>
+           <template lwc:if={isguest}>
+            <lightning-button variant="base" label="Already have an account?" title="Already have an account?"
+                onclick={handleExistingUser}
+                class="slds-button slds-button_middle slds-button_stretch"></lightning-button>
+              </template>
+        </div>
+   </lightning-card>
+  </template>
+</template>

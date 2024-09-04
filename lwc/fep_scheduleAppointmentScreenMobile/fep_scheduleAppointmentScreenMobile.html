@@ -1,0 +1,296 @@
+<template>
+    <lightning-modal-header label="Schedule Appointment"></lightning-modal-header>
+
+    <template if:false={showThankyouForm}>
+
+        <template if:true={showSpinner}>
+            <lightning-spinner variant="brand"></lightning-spinner>
+        </template>
+
+        <lightning-card class="" label="Pick a date and time">
+            <template if:false={showReviewForm}>
+                <div class="slds-m-around_small">
+                    <p><b>Duration: </b>{timeSlotDuration} mins</p>
+
+                    <div class="slds-grid">
+                        <p><b> <abbr class="slds-required" title="required">* </abbr>Select Timezone:</b></p>
+                        <lightning-combobox class="slds-p-left_small" name="Timezone" label="Select Timezone"
+                            value={selectedValue} placeholder="Select Timezone" options={tzOptions}
+                            variant="label-hidden" onchange={handleTZChange}></lightning-combobox>
+
+                    </div>
+
+                    <div class="slds-border_top slds-m-top_x-small"></div>
+
+                </div>
+
+                <div class="slds-m-around_small timeSlotSection">
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title slds-theme_shade">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Select Date and
+                                Time</span>
+                        </h3>
+                    </div>
+
+                    <div class="slds-p-horizontal_medium">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size--1-of-1">
+
+                                <template lwc:if={showDate}>
+                                    <div class="slds-p-horizontal_x-large slds-grid">
+                                        <div class="slds-size_3-of-12 selectDateLabel"><b>Select Date</b></div>
+                                        <lightning-input type="date" class="labelColour slds-size_8-of-12" aria-label=""
+                                            value={inputDate} onchange={handleDateChange}></lightning-input>
+                                        <div class="slds-size_1-of-12"></div>
+                                    </div>
+                                </template>
+
+
+
+                                <template lwc:if={showSlots}>
+
+                                    <div class="slds-p-horizontal_x-large slds-m-top_small">
+                                        <div class="slds-align_absolute-center">All the slots are in {selectedTimeZone}
+                                            format.</div>
+                                        <div class="slds-box">
+                                            <template for:each={timeSlots} for:item="item">
+                                                <div key={item.label}
+                                                    class="slds-size--1-of-1 slds-large-size--3-of-12 slds-button slds-radio_button greenBackgroundButton"
+                                                    style="margin: 5px; border: 1px solid; cursor:pointer;"
+                                                    data-value={item.value} data-name={item.label}
+                                                    onclick={getCoachesForSelectedTime}>
+                                                    <label style="cursor:pointer;"><span
+                                                            class="slds-radio_faux slotCss">{item.label}</span></label>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <template lwc:elseif={showNoSlots}>
+                                    <div class="slds-p-horizontal_x-large slds-m-top_small">
+                                        <div class="slds-box slds-align_absolute-center">
+                                            <p>No slots available for the selected date. Please select another date.</p>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template lwc:else>
+                                    <div class="slds-p-horizontal_x-large slds-m-top_small">
+                                        <div class="slds-box slds-align_absolute-center">
+                                            <p>Select a date to see available time slots.</p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-size--1-of-1 slds-large-size--6-of-12">
+                                <div class="slds-p-horizontal_medium">
+                                    <div class="slds-align_absolute-center"><b>Available Financial Coaches</b></div>
+                                    <div class="slds-align_absolute-center"><u><b><a href={coachBiosUrl} target="_blank"
+                                                    onclick={handleOkay}>View Coach Bios</a></b></u></div>
+                                    <template lwc:if={showCoach}>
+                                        <div class="slds-p-horizontal_medium">
+                                            <template for:each={coachDetail} for:item="currentCoach" for:index="index">
+                                                <div class="slds-box slds-m-around_small" style="cursor:pointer;"
+                                                    key={currentCoach.Id} data-id={currentCoach.Id}
+                                                    data-value={currentCoach.Name} onclick={handleCardClick}>
+                                                    <div class="slds-grid">
+                                                        <div class="">
+
+                                                            <div
+                                                                class="slds-col slds-size_1-of-1  slds-p-horizontal_small slds-align_absolute-center">
+
+                                                                <span
+                                                                    class="slds-avatar slds-avatar_circle slds-avatar_large imageAvtarSize">
+
+                                                                    <img alt="Coach Image" src={currentCoach.photoUrl}
+                                                                        title="Coach Image" />
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="coachNameCss">
+                                                            <span>{currentCoach.Name}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+
+                                        </div>
+                                    </template>
+                                    <template lwc:else>
+                                        <div class="slds-p-top_xx-small"></div>
+                                        <div class="slds-p-top_medium"></div>
+                                        <div class="slds-box slds-align_absolute-center slds-m-around_small">
+                                            <p>Select a time slot to see the available coaches.</p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slds-grid slds-p-around_small slds-border_top">
+                    <div class="">
+
+                        <button class="slds-button slds-button_outline-brand cancelButton" title="Cancel"
+                            onclick={handleOkay}>Cancel</button>
+                    </div>
+                    <div class="slds-col_bump-left">
+                        <lightning-button variant="brand" label="Next" title="Next" class="slds-m-left_x-small"
+                            onclick={handleNext} disabled={isNextButtonDisabled}></lightning-button>
+                    </div>
+                </div>
+
+            </template>
+
+            <template if:true={showReviewForm}>
+
+                <div class="slds-p-horizontal_medium">
+
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title">
+                            <button aria-controls="expando-unique-id" aria-expanded="true"
+                                class="slds-button slds-section__title-action">
+                                <span class="slds-truncate" title="Section Title"> <abbr class="slds-required"
+                                        title="required">* </abbr>Select Appointment Type <span style="color: red;">(Required)</span></span>
+                            </button>
+                        </h3>
+                    </div>
+                    <!-- <template lwc:if={showAppointmentType}> -->
+                    <div class="slds-grid">
+                        <div class="slds-col slds-m-horizontal_medium">
+                            <fieldset class="slds-form-element">
+                                <legend class="slds-form-element__legend slds-form-element__label"></legend>
+                                <div class="slds-form-element__control">
+                                    <div class="appointmentType slds-wrap">
+                                        <div class="slds-grid slds-grid_vertical" style="cursor:pointer">
+                                            <div class="slds-button slds-radio_button appButton" data-value='Video Call'
+                                                onclick={handleAppointmentType}>
+                                                <input type="radio" name="radioGroupx" />
+                                                <lightning-icon icon-name="utility:video" alternative-text="video"
+                                                    title="video" size="large"></lightning-icon>
+                                            </div>
+                                            <div class="appTypeText">Video Call</div>
+                                        </div>
+
+                                        <div class="slds-grid slds-grid_vertical" style="cursor:pointer">
+                                            <div class="slds-button slds-radio_button appButton" data-value='Call Me'
+                                                onclick={handleAppointmentType}>
+                                                <input type="radio" name="radioGroupx" />
+                                                <lightning-icon icon-name="utility:call" alternative-text="call"
+                                                    title="call" size="large"></lightning-icon>
+                                            </div>
+                                            <div class="appTypeText">Call Me</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title">
+                            <button aria-controls="expando-unique-id" aria-expanded="true"
+                                class="slds-button slds-section__title-action">
+                                <span class="slds-truncate" title="Section Title">Review and Confirm</span>
+                            </button>
+                        </h3>
+                    </div>
+                    <div if:true={reviewFormData}>
+                        <div class="slds-form slds-m-around_small reviewMobileForm" role="list">
+                            <template for:each={reviewFormData} for:item="reviewData">
+                                <div key={reviewData.label} class="slds-form__row">
+                                    <div class="slds-form__item" role="listitem">
+                                        <div
+                                            class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                                            <span class="slds-form-element__label">{reviewData.label}</span>
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-form-element__static">
+                                                    <p><lightning-formatted-text data-id={reviewData.id}
+                                                            value={reviewData.value}></lightning-formatted-text></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={appointTypePhone}>
+                                <div
+                                    class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                                    <label class="slds-form-element__label" for="text-input-id-47">
+                                        <abbr class="slds-required" title="required">* </abbr> Call me at phone <span style="color: red;">(Required)</span></label>
+                                    <div class="slds-form-element__control input-no-border">
+                                        <div class=" slds-grid ">
+                                            <input type="tel" class="slds-input slds-size_1-of-2"
+                                                placeholder="XXX-XXX-XXXX" onchange={handlePhoneNumberChange}
+                                                max-length="10" required />
+                                            <div class="slds-grid slds-size_1-of-2 slds-p-left_small">
+                                                <label>Ext&nbsp;&nbsp;</label><input type="text" class="slds-input"
+                                                    onchange={handleExtChange}
+                                                    max-length="10" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </template>
+
+                            <div
+                                class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                                <label class="slds-form-element__label" for="text-input-id-47">
+                                    Anything you’d like coach to know</label>
+                                <div class="slds-form-element__control input-no-border">
+                                    <input type="text" placeholder="Please enter the text here" class="slds-input"
+                                        onchange={handleAdditionalData} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-p-around_small slds-border_top">
+                        <div class="">
+
+                            <button class="slds-button slds-button_outline-brand slds-m-left_x-small cancelButton"
+                                title="Back" onclick={handlePrevious}>Back</button>
+                        </div>
+                        <div class="slds-col_bump-left">
+
+                            <button class="slds-button slds-button_outline-brand slds-m-left_x-small cancelButtonReview"
+                                title="Cancel" onclick={handleOkay}>Cancel</button>
+
+                        </div>
+                        <div class="">
+                            <lightning-button variant="brand" label="Confirm" title="Confirm"
+                                onclick={createServiceAppointment} class="slds-m-left_x-small"
+                                disabled={isButtonDisabled}></lightning-button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </template>
+
+        </lightning-card>
+
+    </template>
+
+    <template if:true={showThankyouForm}>
+        <lightning-card>
+            <div class="slds-align_absolute-center slds-p-around_small" style="height:5rem">
+                Your appointment has been scheduled. Please check your email for a confirmation message with your appointment details.
+            </div>
+            <div class="slds-align_absolute-center">
+                <div class="slds-p-top_large"></div>
+                <div class="slds-p-top_large"></div>
+                <div class="slds-p-top_large"></div>
+                <div class="slds-p-top_large"></div>
+                <div class="slds-border_top"></div>
+                <div class="slds-p-top_large"></div>
+                <lightning-button variant="brand" label="Close" title="Close" onclick={handleClose}></lightning-button>
+            </div>
+            <div class="slds-p-bottom_large"></div>
+            <div class="slds-p-bottom_large"></div>
+        </lightning-card>
+    </template>
+</template>

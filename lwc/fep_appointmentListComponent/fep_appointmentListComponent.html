@@ -1,0 +1,117 @@
+<template>
+    <!-- <lightning-card class="appointmentListCard"  title="My Appointments"> -->
+
+        <article class="slds-card">
+
+            <div class="slds-card__header slds-grid">
+
+                <header class="slds-media slds-media_center slds-has-flexi-truncate" style="z-index: auto;">
+
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                          <a href="#" class="slds-card__header-link slds-truncate" title="Accounts">
+                            <span>My Appointments</span>
+                          </a>
+                        </h2>
+                    </div>
+
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+                <template lwc:if={showTable}>
+                    <div style="overflow: auto;">
+              
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-max-medium-table_stacked-horizontal align_center_text " aria-label="Example table of Opportunities with vertical borders">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Date/Time">Date/Time</div>
+                                </th>
+                                <th class="" scope="col" style="width:15.5rem" >
+                                    <div class="slds-truncate" title="Coach">Coach</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Confirmation">Confirmation #</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Status">Status</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Actions">Action</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={appointmentList} for:item="appointment">
+                                <tr key={appointment.appointment_id} class="slds-hint-parent">
+                                    <td data-label="Date/Time" scope="row">
+                                        <div class="slds-truncate slds-float_left" title={appointment.date_time}>
+                                            {appointment.date_time}
+                                        </div>
+                                    </td>
+                                    <td data-label="Coach">
+                                        <div class="slds-truncate" title={appointment.coach_name}>{appointment.coach_name}</div>
+                                    </td>
+                                    <td data-label="Appointment">
+                                        <div class="slds-truncate" title={appointment.appointment_name}>{appointment.appointment_name}</div>
+                                    </td>
+                                    <td data-label="Status">
+                                        <div class="slds-truncate" title={appointment.status}>{appointment.status}</div>
+                                    </td>
+                                    <td data-label="Actions">
+                                        <template if:true={appointment.showAction}>
+                                            <div class="slds-truncate" title="Actions"><a data-coachname={appointment.coach_name} data-coachid={appointment.coach_id} data-appointmentid={appointment.appointment_id}  onclick={modifyAppointment}>Reschedule</a> | <a data-coachid={appointment.coach_id}  data-coachname={appointment.coach_name} data-appointmentid={appointment.appointment_id} onclick={cancelAppointment}>Cancel</a></div>
+                                        </template>
+                                    </td>
+                                </tr>
+        
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="slds-grid">
+        
+                        <div class="slds-col slds-align_absolute-center">
+        
+                            <!-- <template lwc:if={showPrevious}> -->
+        
+                                <lightning-button-icon disabled={disablePrevious} icon-name="utility:chevronleft" class="slds-p-around_small " onclick={handlePrevious} variant={iconVariantPrev}></lightning-button-icon>
+        
+                            <!-- </template> -->
+                                <span>{currentPage}/{totalPages}</span>
+                            <!-- <template lwc:if={showNext}> -->
+                                <lightning-button-icon disabled={disableNext} icon-name="utility:chevronright" class="slds-p-around_small" onclick={handleNext} variant={iconVariantNext}></lightning-button-icon>
+        
+                            <!-- </template> -->
+        
+                           
+                           
+                        </div>
+        
+                    </div>
+                </template>
+                <template lwc:else>
+        
+                    <div style="max-height:300px;height: 300px;" >
+        
+                        <div class="slds-region_narrow">
+                            <div class="slds-notify_container slds-is-relative" style="z-index: auto;">
+                              <div class="slds-notify slds-notify_toast slds-theme_info" style="display: inline-block;text-align:center" role="status">
+                                <span class="slds-assistive-text">info</span>
+                                <div class="slds-notify__content">
+                                  <h2 class="slds-text-heading_small">No upcoming appointments found</h2>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                </template>
+                
+            </div>
+                
+            
+
+        </article>
+       
+    <!-- </lightning-card> -->
+</template>

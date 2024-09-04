@@ -1,0 +1,65 @@
+<!-- sldsValidatorIgnore -->
+<template>
+  <template lwc:if={errorMessage}>
+    <div class="slds-notify slds-notify_alert" role="alert">
+      <span class="slds-assistive-text">error</span>
+      <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+        title="Description of icon when needed">
+        <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+        </svg>
+      </span>
+      <h2>{errorMessage}
+        <a href='{contactUsLink}'>{hrefTag}</a><template lwc:if={redirectMessage}><span>or you will be automatically redirected shortly</span></template>
+      </h2>
+      <div class="slds-notify__close">
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close"
+          onclick={handleAlert}>
+          <svg class="slds-button__icon" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+      </div>
+    </div>
+  </template>
+  <lightning-card variant="Narrow" title="Select where to send verification code">
+    <div class="slds-p-horizontal_small">
+      <div if:false={isLoaded}>
+        <lightning-spinner variant="brand" alternative-text="Loading" size="xx-large"></lightning-spinner>
+      </div>
+      <lightning-radio-group name="radioGroup" label="Verification Mode" options={options} value={verificationMode}
+        type="radio" onchange={handleVeificationModeChange}></lightning-radio-group>
+      <template if:true='{isVerificationModeEmail}'>
+        <!--    <div>{verificationModeLabel}</div>-->
+        <lightning-input data-type="user-inputEmail" label={verificationModeLabel} type='email' pattern='{emailRegex}'
+          message-when-pattern-mismatch='{emailErrorMessage}' placeholder='example@yourcompanyname.com'
+          onchange='{handleInputChange}' required="true"></lightning-input>
+      </template>
+      <template if:false='{isVerificationModeEmail}'>
+        <lightning-input data-type="user-inputPhone" label={verificationModeLabel} class="slds-m-bottom_xxx-small"
+          type='tel' pattern='{mobileRegex}' message-when-pattern-mismatch='{smsErrorMessage}'
+          placeholder='XXX-XXX-XXXX' onchange={handleMobileChange} required="true"></lightning-input>
+        <div class="slds-clearfix">
+          <div class="slds-float_right">
+            <p class=""><i>{smsMessage}</i></p>
+          </div>
+        </div>
+
+      </template>
+      <!--  <template lwc:if={errorScreenMessage}>
+              <div class="slds-text-align_center slds-text-color_error">{errorScreenMessage}</div>
+            </template>-->
+      <button class="slds-button slds-button_brand slds-button_stretch" onclick={handleLogin}>Proceed</button>
+
+      <div class="slds-p-top_small"></div>
+      <div class="slds-border_top"></div>
+      <div class="slds-p-top_small"></div>
+      <div class="slds-clearfix">
+        <div class="slds-float_right">
+          <a href='{selfRegisterUrl}'>First time? Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </lightning-card>
+</template>

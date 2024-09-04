@@ -1,0 +1,46 @@
+<template>
+    <lightning-modal-header label="Cancel Appointment"></lightning-modal-header>
+    <lightning-modal-body> 
+        <template lwc:if={showForm}>
+        <lightning-card title="Please confirm your appointment cancellation or click 'Close' and reschedule your appointment."> 
+            <template lwc:if={showSpinner}>
+                <lightning-spinner variant="brand"></lightning-spinner>
+            </template> 
+            
+                <ul class="slds-has-dividers_bottom-space">
+                <li class="slds-item"><b>Date/Time:</b>&nbsp;
+                    <lightning-formatted-text value={servcApptDateTime}></lightning-formatted-text>
+                    
+                </li>
+                <li class="slds-item"><b>Coach:</b>&nbsp;{coachName}</li>
+                <li class="slds-item"><b>Confirmation #:</b>&nbsp;{servcApptNumber}</li>
+                <li class="slds-item">
+                    <lightning-textarea label="Reason for cancellation" max-length="255" message-when-too-long="Max 255 characters allowed" value={reason} onchange={handleReasonValue}></lightning-textarea>
+                </li>
+                </ul> 
+                <div class="slds-p-top_medium"></div> 
+                <p style="color:orange">Note: Once an appointment has been canceled, it cannot be recovered, so you will need to make a new appointment.</p>
+        </lightning-card>
+        </template>
+        <template lwc:else>
+            <div class="slds-align_absolute-center" style="height:5rem">
+                Your appointment has been canceled.
+            </div>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <template lwc:if={showForm}>
+            <div class="slds-float_left">
+                <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+            </div>
+            <lightning-button variant="brand" label="Confirm Cancel" onclick={confirmCancel}></lightning-button>&nbsp;&nbsp;
+        </template>
+        <template lwc:else>
+            <div class="slds-align_absolute-center" style="height:5rem">
+                <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+            </div>
+        </template>
+        
+        
+    </lightning-modal-footer>
+</template>

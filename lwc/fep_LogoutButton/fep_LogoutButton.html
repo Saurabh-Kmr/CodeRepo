@@ -1,0 +1,23 @@
+<template>
+	<template if:false={isGuest}>
+		<div class="slds-clearfix">
+			<div class="slds-float_right slds-p-around_small ">
+				<!-- <lightning-button variant="brand" label="Log out" title="logout" onclick={handleLogout}>
+				</lightning-button> -->
+				<div style="display: inline-block;" class="slds-p-horizontal_small">
+
+					<img width="100px" style="max-width:50px;" src={imgUrl}/>
+				</div>
+				<div style="display: inline-block;vertical-align:sub">
+					<span>{userName}</span>
+					<span class="slds-p-horizontal_small">|</span>
+				</div>
+				<template lwc:if={isVerified}>
+					<a style="vertical-align:sub" onclick={handleRegisterMobile}>Verify Mobile</a>
+					<span style="vertical-align:sub" class="slds-p-horizontal_small">|</span>
+				</template>
+				<a style="vertical-align:sub" onclick={handleLogout}>Logout</a>
+			</div>
+		</div>
+	</template>
+</template>

@@ -1,0 +1,44 @@
+.appointmentListCard{
+
+
+    /* height: 300px; */
+    /* overflow: scroll; */
+    /* display: block; */
+    /* scrollbar-width: thin; */
+}
+
+.appointmentListCard .slds-card{
+    overflow: auto;
+    /* scrollbar-width: none; */
+
+}
+
+.align_center_text th{
+
+    text-align: center;
+}
+
+.align_center_text td{
+
+    text-align: center;
+}
+
+.align_center_text a{
+    color:rgb(255, 153, 0)
+}
+
+@media (max-width: 600px) {
+    .align_center_text a{
+        color:rgb(255, 153, 0)
+    }
+    .align_center_text th{
+
+        text-align: center;
+    }
+    
+    .align_center_text td{
+    
+        text-align: right;
+    }
+    
+}

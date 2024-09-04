@@ -1,0 +1,19 @@
+<template>
+    <!-- <article class="slds-card"> -->
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-p-around_medium">
+
+            <template for:each={listOfCoaches} for:item="coach">
+                <div key={coach.Id} class="slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_6-of-12">
+
+                    <c-fep_coach-bios-component coach-details={coach}></c-fep_coach-bios-component>   
+    
+                </div>
+
+            </template>
+          
+        </div>
+    <!-- </article> -->
+
+    
+    
+</template>

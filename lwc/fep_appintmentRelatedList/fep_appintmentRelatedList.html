@@ -1,0 +1,67 @@
+<template>
+    <div class="slds-box" style="border-color:lightgray;padding:0px;">
+        <article class="slds-card">
+            <!--CARD HEADER CHILD COMPONENT-->
+            <div class="slds-card__header slds-grid" style="padding:15px;background-color:rgb(243,243,243);border-radius:5px;border-color:lightgray;">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container">
+                    <lightning-icon icon-name="utility:event" size="small"></lightning-icon>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        Appointments
+                    </h2>
+                </div>
+                </header>
+            </div>
+            <!---->
+            <!--CARD BODY WITH CHILD COMPONENT-->
+            <div class="slds-card__body slds-card__body_inner">
+                <template if:true={showTable}>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-max-medium-table_stacked-horizontal align_center_text " aria-label="Example table of Opportunities with vertical borders">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Confirmation">Appointment #</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Date/Time">Date/Time</div>
+                                </th>
+                                <th class="" scope="col" style="width:15.5rem" >
+                                    <div class="slds-truncate" title="Coach">Coach</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Status">Status</div>
+                                </th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={recordList} for:item="appointment">
+                                <tr key={appointment.appointment_id} class="slds-hint-parent">
+                                    <td data-label="Appointment">
+                                        <div class="slds-truncate" title={appointment.appointment_name}>
+                                            <a data-id={appointment.appointment_id} onclick={navigateToRecord}>{appointment.appointment_name}</a>
+                                        </div>
+                                    </td>
+                                    <td data-label="Coach">
+                                        <div class="slds-truncate" title={appointment.date_time}>{appointment.date_time}</div>
+                                    </td> 
+                                    <td data-label="Coach">
+                                        <div class="slds-truncate" title={appointment.coach_name}>
+                                            <a data-id={appointment.coach_id} onclick={navigateToRecord}>{appointment.coach_name}</a>
+                                        </div>
+                                    </td>
+                                    <td data-label="Status">
+                                        <div class="slds-truncate" title={appointment.status}>{appointment.status}</div>
+                                    </td> 
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </template>
+            </div> 
+        </article>
+    </div>
+</template>

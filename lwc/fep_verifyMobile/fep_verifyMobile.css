@@ -1,0 +1,8 @@
+
+.success {
+   background:var(--slds-g-color-success-base-50,green) !important;
+  }
+
+.skip{
+   background-color:grey !important;
+}

@@ -1,0 +1,31 @@
+<template>
+    <lightning-card>
+            <lightning-layout class="slds-m-left_large" multiple-rows="false">
+                <template for:each={lstDisplay} for:item="objCard">
+                    <lightning-layout-item key={objCard.fieldAPI} size={objCard.decMobileSize} large-device-size={objCard.decCardSize}>
+                        <div class="slds-grid " >
+                            <div class=" slds-size--1-of-2 slds-large-size--1-of-2 slds-p-right_xx-large">
+                                <lightning-layout-item flexibility="grow" padding="around-small" >
+                                    <p>
+                                        <lightning-formatted-text class ='customcolor' value={objCard.label}></lightning-formatted-text>
+                                        <template if:true={objCard.isToolTip}>
+                                            <lightning-helptext class="slds-p-left_xx-small" content={objCard.strToolTipText}></lightning-helptext>
+                                        </template>
+                                    </p>
+                                    
+                                    
+                                </lightning-layout-item>
+                            </div>
+                            <div class="slds-size--1-of-2 slds-large-size--1-of-2">
+                                <lightning-layout-item flexibility="grow" padding="around-small"  >
+                                    <p><b><lightning-formatted-text value={objCard.fieldValue} ></lightning-formatted-text></b></p>
+                                </lightning-layout-item>
+                             
+                            </div>     
+                        </div>
+                     </lightning-layout-item>
+                 </template>
+           </lightning-layout>
+            <!--style="width:100px;"-->
+    </lightning-card>
+</template>

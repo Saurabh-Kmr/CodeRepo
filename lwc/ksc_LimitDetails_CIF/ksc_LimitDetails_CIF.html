@@ -1,0 +1,37 @@
+<template>
+    <lightning-card>
+        <template if:true={invokeHeaderApi}>
+            <c-ksc_-limit-details-header crn={crn} ></c-ksc_-limit-details-header>
+        </template>
+
+        <template if:true={data}>
+            <div >
+                <lightning-datatable
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    is-loading = {showSpinner}
+                    enable-infinite-loading
+                    min-column-width="160"
+                    class = "slds-max-medium-table_stacked"
+                    onrowselection = {handleRowSelection}
+                    max-row-selection = 1
+                    >
+                </lightning-datatable>
+            </div>
+        </template>
+        <div if:true={error}>
+            <div class="slds-align_absolute-center">
+                <lightning-icon  icon-name="utility:error" alternative-text="Error Occured" title="Error Occured"></lightning-icon><br>
+            </div>    
+            <div class="slds-align_absolute-center">{error}</div>
+            <lightning-button variant="brand" label="Retry" title="Retry" onclick={handleRetry}></lightning-button>
+        </div>
+        <div if:true={showSpinner}><lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner></div>
+        <template if:true={islimitSelected}>
+            <c-ksc_-limit-dtls-inquiry  limit-inq-id ={limitID} ></c-ksc_-limit-dtls-inquiry>
+        </template>
+    </lightning-card>
+
+        
+</template>

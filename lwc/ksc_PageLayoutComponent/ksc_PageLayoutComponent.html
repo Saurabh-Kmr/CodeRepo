@@ -1,0 +1,14 @@
+<template>
+    <lightning-layout class="slds-p-around_none" multiple-rows="false">
+        <template for:each={lstDisplay} for:item="objCard">
+            <lightning-layout-item key={objCard.fieldAPI} size={objCard.decMobileSize} large-device-size={objCard.decCardSize} class="sds--borderBottom">
+                <lightning-layout-item flexibility="grow">
+                        <lightning-formatted-text class ="customcolor sds--labelColor" value={objCard.label}></lightning-formatted-text>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="grow">   
+                        <lightning-formatted-text class ="customcolor" value={objCard.fieldValue} style="width:19rem"></lightning-formatted-text>
+                </lightning-layout-item>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+</template>

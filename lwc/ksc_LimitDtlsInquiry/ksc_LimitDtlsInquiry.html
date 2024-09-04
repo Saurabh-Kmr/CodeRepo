@@ -1,0 +1,14 @@
+<template>
+    <div if:false={showError}>
+        <div class="slds-p-top_x-large slds-p-left_large">
+            <b> Limit Details - {limitInqId}</b>
+        </div>
+        <c-k-s-c_-two-column-layout-component lst-display = {data}></c-k-s-c_-two-column-layout-component>
+    </div>
+    <div if:true={showError}>
+        Error : {errorMessage}  
+        <div class="slds-p-top_x-small">
+            <lightning-button variant="brand" label="Retry" title="Retry" onclick={handleRetry}></lightning-button></div>
+    </div>
+    <div if:true={showSpinner}><lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner></div>
+</template>

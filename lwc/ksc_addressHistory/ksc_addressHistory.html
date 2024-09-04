@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+       
+        <h1 slot="title">Address History</h1>
+        
+        <c-k-s-c_-two-column-layout-component lst-display = {lstDisplay}></c-k-s-c_-two-column-layout-component>
+        <div style="display:inline-block;margin-right:10px" >
+            <template if:true={boolShowModal}>
+                <c-ksc_-modal-component
+                            str-modal-data={strModalData}
+                            onmodalcloseevent={handleNavigate}
+                 ></c-ksc_-modal-component>
+                </template>
+            <lightning-icon icon-name="utility:clock"  class="iconpointerevetns slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default" onclick={handleClick} alternative-text="Clock!" title="Clock">
+            </lightning-icon>
+        </div>
+    </lightning-card>
+</template>

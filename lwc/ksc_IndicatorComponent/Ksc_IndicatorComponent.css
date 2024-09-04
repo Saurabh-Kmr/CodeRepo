@@ -1,0 +1,11 @@
+.customcolor{
+    color: black;
+}
+.errorbox{
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    background-color: #FCDDD9;
+    padding: 10px;
+    border: 1px solid red;
+}

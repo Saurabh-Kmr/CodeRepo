@@ -1,0 +1,22 @@
+.customcolor{
+    font-size: 12px;
+    font-family: Arial;
+    float: left;
+    /* border-bottom: 1px solid #e2e2e2;  */
+    padding: 6px;
+    margin-right: 2px;
+
+}
+
+.sds--labelColor{
+    color: #444;
+    width: 138px;
+}
+
+.sds--borderBottom{
+    border-bottom: 1px solid #e2e2e2; 
+}
+/* .sds--layoutItem{
+    border-bottom: 1px solid #e2e2e2;
+    
+} */

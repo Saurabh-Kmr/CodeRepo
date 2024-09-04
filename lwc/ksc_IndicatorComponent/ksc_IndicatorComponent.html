@@ -1,0 +1,36 @@
+<!--HTML for Indicators Card-->
+<template>
+    <lightning-card class="slds-card">
+        <h1>
+            <span class="slds-page-header__title slds-hyphenate slds-p-bottom_large" 
+                title="Indicators">
+                Indicators
+            </span>
+          </h1>
+        
+        <div class=”slds-box”>
+          <!--Spinner Component-->
+                <template if:true={boolShowSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+
+                <!--Icon and text Component-->
+                <template if:false={boolShowSpinner}>
+                    <c-ksc_-text-icon-component lst-indicator={lstInputEnum}>
+                    </c-ksc_-text-icon-component>
+                    </template>
+        </div>     
+                <!--Error Component-->
+          
+        <template if:true={boolShowError}>
+            <div class="slds-box">  
+                <div class="slds-align_absolute-center">
+                    <!-- <lightning-icon  icon-name="utility:error" alternative-text="Error Occured" title="Error Occured" style="--slds-c-icon-color-foreground-default: white;"></lightning-icon><br> -->
+                    <lightning-icon  icon-name="utility:error" alternative-text="Error Occured" title="Error Occured"></lightning-icon><br>
+                </div>   
+                <div class="slds-align_absolute-center slds-text-align--center">{strErrorMsg}</div>
+            </div>  
+        </template>
+        
+    </lightning-card> 
+</template>

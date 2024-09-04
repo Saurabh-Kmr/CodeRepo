@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Org_Specific__c</fullName>
+    <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>If checked, the value of this setting is specific each Org and cannot be used in other orgs. This means, when sandbox is refreshed, settings with these values must be cleared.</inlineHelpText>
+    <label>Org Specific</label>
+    <type>Checkbox</type>
+</CustomField>
